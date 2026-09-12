@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adexview"
+version = "2.0.0"
+description = "Offline viewer, LDAP query tool, and security audit for Sysinternals AD Explorer snapshots"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = []
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Security",
+]
+
+[project.optional-dependencies]
+full = ["openpyxl>=3.1", "cryptography>=42.0"]
+
+[project.scripts]
+adexview = "adexview.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+adexview = ["static/*"]

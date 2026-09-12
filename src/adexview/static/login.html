@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>adexview login</title>
+    <link rel="stylesheet" href="/static/admin.css" />
+    <style>
+      main.login {
+        max-width: 420px;
+        margin: 12vh auto;
+      }
+      .login form {
+        display: grid;
+        gap: 12px;
+      }
+      .login input[type="password"] {
+        width: 100%;
+        font-size: 15px;
+      }
+      .login button {
+        justify-self: start;
+        padding: 8px 18px;
+      }
+      .error {
+        color: var(--danger);
+        margin: 0;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="login">
+      <div class="panel">
+        <h2>adexview</h2>
+        <p class="hint">
+          This viewer holds Active Directory snapshots. Enter the password printed when the server
+          started, or the one configured with <code>--password</code>.
+        </p>
+        <!--error-->
+        <form method="post" action="/login" autocomplete="off">
+          <label>
+            Password
+            <input id="password" name="password" type="password" autofocus autocomplete="current-password" required />
+          </label>
+          <button type="submit">Sign in</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

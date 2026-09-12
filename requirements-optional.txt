@@ -1,0 +1,4 @@
+# adexview runs on the Python standard library. These add Excel export
+# (openpyxl) and X.509 certificate decoding (cryptography).
+openpyxl>=3.1
+cryptography>=42.0

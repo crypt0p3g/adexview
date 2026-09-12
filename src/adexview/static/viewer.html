@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>adexview</title>
+    <link rel="stylesheet" href="/static/viewer.css" />
+  </head>
+  <body>
+    <aside>
+      <div class="sidebarHeader">
+        <div class="title">adexview</div>
+        <a id="adminLink" href="/admin" hidden>Databases</a
+        ><select id="theme" aria-label="Color theme" title="Color theme">
+          <option value="system">System</option>
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+        <form id="logoutForm" method="post" action="/logout" hidden>
+          <button type="submit" title="End this session">Sign out</button>
+        </form>
+      </div>
+      <div class="projectLine">
+        <div id="project" class="muted"></div>
+        <button id="toggleDiagnostics">Diagnostics</button>
+      </div>
+      <div id="databaseBox" hidden>
+        <label for="database">Database</label
+        ><select id="database" aria-label="Select database"></select
+        ><span id="databaseScan" class="muted"></span>
+      </div>
+      <section id="treeSection" hidden>
+        <div class="treeTitle">
+          <span>Directory tree</span><button id="refreshTree" title="Reload directory tree">↻</button>
+        </div>
+        <div id="tree"></div>
+      </section>
+      <section id="reportsSection" hidden>
+        <div class="treeTitle"><span>Reports</span></div>
+        <div id="reportButtons"></div>
+      </section>
+      <div id="files"></div>
+    </aside>
+    <div
+      id="splitter"
+      role="separator"
+      aria-label="Resize directory pane"
+      aria-orientation="vertical"
+      tabindex="0"
+    ></div>
+    <main>
+      <div class="search">
+        <input
+          id="query"
+          placeholder="Search values, SIDs, IPs, Japanese text…  (press / to focus, l for the LDAP filter)"
+        /><button id="searchBtn">Search</button>
+        <div class="ldapSearch">
+          <input id="ldapFilter" value="(objectClass=*)" aria-label="LDAP filter" /><input
+            id="schemaSearch"
+            placeholder="Find schema attribute…"
+            aria-label="Find schema attribute"
+          /><select id="schemaAttribute" aria-label="Snapshot schema attribute">
+            <option value="">Loading schema attributes…</option></select
+          ><button id="insertPresence" title="Insert a presence test for the selected attribute">
+            Insert (attr=*)</button
+          ><button id="ldapSearchBtn">Run LDAP filter</button>
+          <div class="auditPresetRow">
+            <input
+              id="cnQuick"
+              placeholder="Quick CN/name contains…"
+              aria-label="Find objects whose CN or name contains text"
+              title="Uses the compact indexed name field"
+            /><select id="auditQueryPreset" aria-label="Audit query preset" hidden>
+              <option value="">Loading audit queries…</option></select
+            ><input
+              id="ldapAttributes"
+              placeholder="Extra columns for LDAP results, comma separated (e.g. mail, memberOf, whenChanged)"
+              aria-label="Extra attributes to show as columns in LDAP results"
+              title="Attributes named in the filter are always added; list more here"
+            /><span id="auditQueryInfo" class="muted" hidden></span>
+          </div>
+        </div>
+      </div>
+      <div id="indexing">
+        <progress id="indexProgress" max="1" value="0"></progress
+        ><span id="indexText" class="muted">Checking index…</span>
+      </div>
+      <div class="toolbar">
+        <b id="current">Choose a report</b
+        ><button id="copyQuery" hidden title="Copy the complete LDAP filter">Copy query</button
+        ><button id="prev">← Previous</button><button id="next">Next →</button
+        ><select id="pageSize" aria-label="Result count">
+          <option selected>100</option>
+          <option>250</option>
+          <option>500</option></select
+        ><button id="exportCsv" disabled title="Export the currently displayed rows">Export CSV</button
+        ><button id="columnsBtn" disabled title="Choose, resize, and reorder columns">Columns</button
+        ><button id="clearFilters" title="Clear every column filter">Clear filters</button
+        ><span
+          class="muted"
+          title="Filters apply after 0.9 seconds or Enter. Use !value to exclude and a|b for alternatives."
+          >Column filters: text · !exclude · a|b</span
+        ><label><input id="fullCells" type="checkbox" checked /> Full-width cells</label
+        ><label title="Dim the current table and navigation while data is loading"
+          ><input id="dimLoading" type="checkbox" checked /> Dim loading</label
+        ><span id="status" class="status"></span>
+      </div>
+      <div id="columnPanel" class="columnPanel" hidden></div>
+      <div id="tableWrap" class="full-cells" tabindex="0"></div>
+    </main>
+    <script src="/static/viewer.js"></script>
+  </body>
+</html>

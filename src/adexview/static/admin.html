@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>adexview administration</title>
+    <link rel="stylesheet" href="/static/admin.css" />
+  </head>
+  <body>
+    <main>
+      <div class="top">
+        <h1>adexview administration</h1>
+        <a href="/">Back to viewer</a>
+        <form method="post" action="/logout"><button type="submit">Sign out</button></form>
+      </div>
+      <section class="panel">
+        <h2>Upload AD Explorer snapshot</h2>
+        <div class="upload">
+          <label
+            >AD Explorer snapshot<input
+              id="snapshotFile"
+              type="file"
+              accept=".dat,application/octet-stream" /></label
+          ><label
+            >Snapshot name<input
+              id="snapshotName"
+              maxlength="120"
+              placeholder="Defaults to the filename" /></label
+          ><button id="snapshotUploadButton">Upload snapshot</button>
+        </div>
+        <progress id="snapshotUploadProgress" max="1" value="0" hidden></progress>
+        <div id="snapshotUploadStatus" class="status">
+          Snapshots are streamed into the configured snapshot directory and validated before becoming visible.
+        </div>
+      </section>
+      <section class="panel">
+        <div class="top">
+          <h2>Snapshots</h2>
+          <label
+            class="auditOption"
+            title="Creates Findings, ACL, RBCD, DNS, privileged-member, and certificate reports; requires more time and memory"
+            ><input id="snapshotAudit" type="checkbox" checked /> Include security audit</label
+          ><button id="snapshotRefresh">Refresh</button>
+        </div>
+        <div id="snapshotDirectory" class="directory"></div>
+        <div id="snapshotStatus" class="status"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Snapshot</th>
+              <th>Size</th>
+              <th>Modified</th>
+              <th>Convert to database</th>
+              <th>Progress</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="snapshotRows"></tbody>
+        </table>
+        <div id="snapshotEmpty" class="empty" hidden>No AD Explorer snapshots are present.</div>
+      </section>
+      <section class="panel">
+        <h2>Upload database</h2>
+        <div class="upload">
+          <label
+            >SQLite viewer database<input
+              id="uploadFile"
+              type="file"
+              accept=".sqlite3,.sqlite,.db,application/vnd.sqlite3,application/octet-stream" /></label
+          ><label
+            >Database name<input
+              id="uploadName"
+              maxlength="120"
+              placeholder="Defaults to the filename" /></label
+          ><button id="uploadButton">Upload</button>
+        </div>
+        <progress id="uploadProgress" max="1" value="0" hidden></progress>
+        <div id="uploadStatus" class="status">
+          Uploads are streamed to disk and validated before they become visible.
+        </div>
+      </section>
+      <section class="panel">
+        <div class="top">
+          <h2>Databases</h2>
+          <button id="refresh">Refresh</button>
+        </div>
+        <div id="listStatus" class="status"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Rows</th>
+              <th>Modified</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="databaseRows"></tbody>
+        </table>
+        <div id="empty" class="empty" hidden>No viewer databases are present.</div>
+      </section>
+    </main>
+    <script src="/static/admin.js"></script>
+  </body>
+</html>

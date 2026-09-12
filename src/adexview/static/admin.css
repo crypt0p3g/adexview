@@ -1,0 +1,308 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f3f3f3;
+  --panel: #fff;
+  --text: #202020;
+  --muted: #666;
+  --line: #c8c8c8;
+  --control: #fff;
+  --accent: #075a9c;
+  --danger: #a11;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1d1f22;
+    --panel: #25272b;
+    --text: #e8e9eb;
+    --muted: #a9adb4;
+    --line: #4b4e55;
+    --control: #2b2e33;
+    --accent: #79b8e8;
+    --danger: #ff8b8b;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    14px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+main {
+  width: min(1600px, calc(100% - 32px));
+  margin: 24px auto;
+}
+.top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.top h1 {
+  font-size: 22px;
+  margin: 0 auto 0 0;
+}
+.top h2 {
+  margin-right: auto;
+}
+.top a {
+  color: var(--accent);
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 18px;
+  margin-top: 18px;
+  min-width: 0;
+}
+.panel h2 {
+  font-size: 17px;
+  margin: 0 0 14px;
+}
+.upload {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(180px, 320px) auto;
+  gap: 10px;
+  align-items: end;
+}
+label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+}
+input,
+button {
+  font: inherit;
+  color: var(--text);
+  background: var(--control);
+  border: 1px solid var(--line);
+  padding: 8px;
+  border-radius: 2px;
+  max-width: 100%;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.danger,
+.invalidFile {
+  color: var(--danger);
+}
+progress {
+  width: 100%;
+  height: 18px;
+  margin-top: 14px;
+}
+.status {
+  min-height: 20px;
+  margin-top: 8px;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+.token {
+  display: grid;
+  grid-template-columns: minmax(220px, 440px) auto;
+  gap: 8px;
+  align-items: end;
+  margin-top: 14px;
+}
+.token input {
+  width: 100%;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  text-align: left;
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+.dbName {
+  font-weight: 600;
+}
+input.dbName {
+  width: 100%;
+  min-width: 120px;
+}
+.path {
+  font:
+    12px ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.invalidFile {
+  font:
+    12px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  margin-top: 3px;
+}
+.actions {
+  text-align: right;
+  white-space: nowrap;
+}
+.actions button + button {
+  margin-left: 6px;
+}
+.empty {
+  padding: 22px 8px;
+  color: var(--muted);
+}
+.convert {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.convert input {
+  min-width: 150px;
+  width: 240px;
+}
+.job {
+  min-width: 280px;
+  color: var(--muted);
+  font-size: 12px;
+}
+/* Sizes, dates and row counts stay on one line; the name column absorbs the width. */
+#snapshotRows td:nth-child(2),
+#snapshotRows td:nth-child(3),
+#databaseRows td:nth-child(2),
+#databaseRows td:nth-child(3),
+#databaseRows td:nth-child(4) {
+  white-space: nowrap;
+  color: var(--muted);
+}
+#snapshotRows td:first-child,
+#databaseRows td:first-child {
+  width: 34%;
+}
+.job progress {
+  display: block;
+  height: 12px;
+  margin: 4px 0 0;
+}
+.directory {
+  font:
+    12px ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.auditOption {
+  display: flex;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+.auditOption input {
+  margin: 0;
+}
+@media (max-width: 1050px) {
+  .upload {
+    grid-template-columns: 1fr;
+  }
+  .token {
+    grid-template-columns: 1fr;
+  }
+  .top {
+    flex-wrap: wrap;
+  }
+  .auditOption {
+    width: 100%;
+    margin-left: 0;
+  }
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+  thead {
+    display: none;
+  }
+  tr {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  td {
+    border: 0;
+    padding: 4px;
+    min-width: 0;
+  }
+  .actions {
+    display: flex;
+    text-align: left;
+    white-space: normal;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .actions button + button {
+    margin-left: 0;
+  }
+  .convert {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .convert input {
+    width: min(100%, 320px);
+    min-width: 0;
+    flex: 1 1 180px;
+  }
+  .job {
+    min-width: 0;
+  }
+  #snapshotRows td:nth-child(2)::before,
+  #snapshotRows td:nth-child(3)::before,
+  #snapshotRows td:nth-child(4)::before,
+  #snapshotRows td:nth-child(5)::before,
+  #databaseRows td:nth-child(2)::before,
+  #databaseRows td:nth-child(3)::before,
+  #databaseRows td:nth-child(4)::before {
+    display: inline-block;
+    min-width: 118px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  #snapshotRows td:nth-child(2)::before,
+  #databaseRows td:nth-child(2)::before {
+    content: "Size";
+  }
+  #snapshotRows td:nth-child(3)::before,
+  #databaseRows td:nth-child(4)::before {
+    content: "Modified";
+  }
+  #snapshotRows td:nth-child(4)::before {
+    content: "Convert";
+  }
+  #snapshotRows td:nth-child(5)::before {
+    content: "Progress";
+  }
+  #databaseRows td:nth-child(3)::before {
+    content: "Rows";
+  }
+}
